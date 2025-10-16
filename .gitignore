@@ -56,3 +56,5 @@ coverage/
 
 # CSS that's generated (since you're using Tailwind)
 src/style.css
+
+js/config.js

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const humidityPerc = document.getElementById("humidity");
   const windSpeed = document.getElementById("windSpeed");
   const cityName = document.getElementById("cityName");
+  const weatherIcon = document.getElementById("svgWeather");
 
   textInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCity(Data.location.name);
         updateHumidity(Data.current.humidity);
         updateWind(Data.current.wind_kph);
+        updateWeatherSvg(Data.current.condition.text);
       })
       .catch((error) => {
         //starts when an error occurs in any part of the .then chain
@@ -64,4 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function getInput() {
     return textInput.value;
   }
+
+  function updateWeatherSvg() {}
 });

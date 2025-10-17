@@ -1,24 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
   const apiKey = CONFIG.WEATHER_API_KEY;
 
-  async function getWeather(city) {
-    try {
-      const apiUrl =
-        `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+  function getWeather(city) {
+    //fetching api url and getting promise obj
+    const fetchPromise = fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`,
+    );
 
-      const response = await fetch(apiUrl);
+    fetchPromise
+    //when we get a response object back from the server, run the arrow function
+      .then((Response) => {
+        if (!Response.ok) {
+          throw new Error(`Http error: ${Response.status}`);
+        }
+        return Response.json(); //returns a new promise obj
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      console.log(data);
-    } catch (error) {
-      console.error("Failed to fetch weather: ", error);
-    }
+      })
+      .then((Data) => { //starts when the promise is resolved 
+        console.log(Data); 
+      })
+      .catch((error) => { //starts when an error occurs in any part of the .then chain
+        console.error(`Fetch failed, ${error.message} occurred!`)
+      })
   }
 
-  getWeather("Bjelovar");
+  getWeather("Zagreb");
 });

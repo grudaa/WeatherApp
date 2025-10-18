@@ -67,5 +67,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return textInput.value;
   }
 
-  function updateWeatherSvg() {}
+  function updateWeatherSvg(weatherStatus) {
+    //map for storing svg data
+    const customSvgs = {
+      sunny: "./src/svg/animated/day.svg",
+      clear: "./src/svg/animated/day.svg",
+      overcast: "./src/svg/animated/cloudy.svg",
+      "partly cloudy": "./src/svg/animated/cloudy-day-1.svg",
+      rainy: "./src/svg/animated/rainy-6.svg",
+      storm: "./src/svg/animated/thunder.svg",
+      "moderate snow": "./src/svg/animated/snowy-6.svg",
+    };
+
+    const svgLC = weatherStatus.toLowerCase();
+
+    if (!customSvgs[svgLC]) {
+      console.log("Unmapped weather condition:", weatherStatus);
+    }
+
+    weatherIcon.setAttribute("src", customSvgs[svgLC]);
+  }
 });
